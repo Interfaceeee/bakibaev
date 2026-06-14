@@ -44,12 +44,14 @@
   html{transition:background .4s}
   body,nav,.stat,.skill-card,.edu,.card,.ig-card,.chip,.yt-wrap,.exp-row{transition:background-color .4s,border-color .4s,color .4s}
   *{margin:0;padding:0;box-sizing:border-box}
-  html{scroll-behavior:smooth}
+  html{scroll-behavior:smooth;overflow-x:hidden}
   body{
     background:var(--bg);color:var(--ink);
     font-family:'Manrope',system-ui,sans-serif;
     -webkit-font-smoothing:antialiased;line-height:1.5;overflow-x:hidden;
+    max-width:100vw;
   }
+  .hero{overflow:hidden}
   ::selection{background:var(--accent);color:#fff}
   a{color:inherit;text-decoration:none}
   .wrap{max-width:1120px;margin:0 auto;padding:0 28px}
@@ -62,6 +64,9 @@
   nav.scrolled{border-bottom:1px solid var(--line)}
   .nav-in{display:flex;align-items:center;justify-content:space-between;height:74px}
   .logo{font-weight:800;font-size:19px;letter-spacing:-.02em;display:flex;align-items:center;gap:9px}
+  .logo-icon{padding:0}
+  .logo-icon img{width:34px;height:34px;border-radius:50%;display:block;transition:transform .25s}
+  .logo-icon:hover img{transform:scale(1.08) rotate(-4deg)}
   .logo .dot{width:9px;height:9px;border-radius:50%;background:var(--accent)}
   .nav-links{display:flex;gap:32px;font-size:15px;font-weight:500}
   .nav-links a{color:var(--muted);transition:color .2s;position:relative}
@@ -273,7 +278,7 @@
 
 <nav id="nav">
   <div class="wrap nav-in">
-    <div class="logo"><span class="dot"></span>Ислам Бакибаев</div>
+    <a href="#" class="logo logo-icon" aria-label="Ислам Бакибаев"><img src="data:image/png;base64,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" alt="Ислам Бакибаев" width="34" height="34"></a>
     <div class="nav-right">
       <div class="nav-links">
         <a href="#about" data-i18n="nav_about">Обо мне</a>
@@ -306,9 +311,7 @@
   <div class="role reveal" data-i18n="role">Product Marketing Manager</div>
   <p class="sub reveal" data-i18n="sub">Работаю на стыке продукта, маркетинга и управления проектами — от идеи и стратегии до запуска и масштабирования.</p>
   <div class="hero-meta reveal">
-    <span><span class="ico-i"><svg viewBox="0 0 24 24"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg></span> <span data-i18n="m_age">21 год</span></span>
-    <span><span class="ico-i"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M3 12h18M12 3a14 14 0 0 1 0 18M12 3a14 14 0 0 0 0 18"/></svg></span> <span data-i18n="m_lang">RU · EN · KZ · KG</span></span>
-    <span><span class="ico-i"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span> <span data-i18n="m_exp">4+ года опыта</span></span>
+    <span><span class="ico-i"><svg viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="13" rx="2"/><path d="M8 7V5a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"/></svg></span> <span data-i18n="m_exp">5+ лет опыта</span></span>
     <span><span class="ico-i"><svg viewBox="0 0 24 24"><path d="M3 11l19-7-7 19-2.5-8.5L3 11Z"/></svg></span> <span data-i18n="m_move">Готов к переезду</span></span>
   </div>
   <div class="hero-cta reveal">
@@ -355,7 +358,7 @@
 <!-- EXPERIENCE -->
 <section class="block wrap" id="experience">
   <div class="sec-head reveal">
-    <div class="sec-kicker" data-i18n="exp_k">Карьера · 4+ года</div>
+    <div class="sec-kicker" data-i18n="exp_k">Карьера · 5+ лет</div>
     <div class="sec-title" data-i18n="exp_t">Опыт <em>работы</em></div>
   </div>
   <div class="exp">
@@ -605,7 +608,7 @@
       headline:'Маркетинг,|что <em>двигает</em>|продукты',
       role:"Product Marketing Manager",
       sub:"Работаю на стыке продукта, маркетинга и управления проектами — от идеи и стратегии до запуска и масштабирования.",
-      m_age:"21 год",m_lang:"RU · EN · KZ · KG",m_exp:"4+ года опыта",m_move:"Готов к переезду",
+      m_age:"21 год",m_lang:"RU · EN · KZ · KG",m_exp:"5+ лет опыта",m_move:"Готов к переезду",
       hero_cta1:"Смотреть опыт",hero_pdf:"Скачать резюме PDF",hero_cta2:"Контакты",
       strip:"Где работал",
       stat1:"года в маркетинге и продукте",stat2:"гостей на организованном фестивале",stat3:"человек в операционной команде",stat4:"бюджет проекта jinalike.fest",
@@ -614,7 +617,7 @@
       about_lead:'От <em>идеи и стратегии</em> до запуска и масштабирования продукта.',
       about_p1:"Умею выстраивать go-to-market, позиционирование, партнёрские и event-кампании, управлять командами и подрядчиками, работать с бюджетами и сроками.",
       about_p2:"Привык брать ответственность за результат и доводить проекты до финала даже в условиях неопределённости и сжатых дедлайнов. Активно использую AI-инструменты для автоматизации маркетинговых и операционных процессов.",
-      exp_k:"Карьера · 4+ года",exp_t:'Опыт <em>работы</em>',
+      exp_k:"Карьера · 5+ лет",exp_t:'Опыт <em>работы</em>',
       proj_k:"Портфолио",proj_t:'Проекты в <em>действии</em>',
       ig1t:"jinalike.fest — промо-ролик",ig1s:"Reels · промо-кампания фестиваля",
       ig2t:"jinalike.fest — отчётный ролик",ig2s:"Reels · итоги события",
@@ -673,7 +676,7 @@
       headline:'Marketing|that <em>moves</em>|products',
       role:"Product Marketing Manager",
       sub:"Working at the intersection of product, marketing and project management — from idea and strategy to launch and scale.",
-      m_age:"21 y.o.",m_lang:"RU · EN · KZ · KG",m_exp:"4+ years experience",m_move:"Open to relocation",
+      m_age:"21 y.o.",m_lang:"RU · EN · KZ · KG",m_exp:"5+ years experience",m_move:"Open to relocation",
       hero_cta1:"View experience",hero_pdf:"Download CV (PDF)",hero_cta2:"Contact",
       strip:"Where I worked",
       stat1:"years in marketing & product",stat2:"guests at the festival I co-organized",stat3:"people in the operations team",stat4:"jinalike.fest project budget",
@@ -682,7 +685,7 @@
       about_lead:'From <em>idea and strategy</em> to product launch and scale.',
       about_p1:"I build go-to-market, positioning, partnership and event campaigns, manage teams and contractors, and work with budgets and deadlines.",
       about_p2:"I take ownership of outcomes and see projects through to the finish even under uncertainty and tight deadlines. I actively use AI tools to automate marketing and operational processes.",
-      exp_k:"Career · 4+ years",exp_t:'Work <em>experience</em>',
+      exp_k:"Career · 5+ years",exp_t:'Work <em>experience</em>',
       proj_k:"Portfolio",proj_t:'Projects in <em>action</em>',
       ig1t:"jinalike.fest — promo reel",ig1s:"Reels · festival promo campaign",
       ig2t:"jinalike.fest — recap reel",ig2s:"Reels · event highlights",
